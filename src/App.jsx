@@ -6,36 +6,21 @@ import WeatherCard from './components/weatherCard/WeatherCard'
 function App() {
   const [value, setValue] = useState('')
   const [currWeather, setCurrWeather] = useState({})
+  const [currCity, setCurrCity] = useState([])
   const handleClick = (e) => {
     e.preventDefault()
     FetchingEightDays(value).then((data) => {
       setCurrWeather(data)
-      console.log(data)
+      const country = data.country
+      const city = data.name
+
+      setCurrCity([country, city])
     })
 
     setValue('')
   }
-  useEffect(() => {
-    // getCity('donetsdsadk').then((data) => console.log(data))
-    // getweather().then((data) => console.log(data))
-    // Fetching().then((data) => console.log(data))
-    // test('KiEv').then((data) => console.log(data))
-    // console.log(Date.now())
-    // Fetching().then((data) => console.log(data))
-    // FetchingEightDays('lviv').then((data) =>
-    //   console.log(timeConverter(data.current.dt))
-    // )
-    // const timestampMillis = Date.now()
-    // const valentines = new Date(Date.now()).getDate()
-    // const month = valentines.getMonth()
-    // console.log(valentines)
-    // console.log(timeConverter(1695235531))
-    // Convert milliseconds to seconds
-    // const timestampSeconds = Math.floor(timestampMillis / 1000)
-    // console.log('Unix timestamp in milliseconds:', timestampMillis)
-    // console.log('Unix timestamp in seconds:', timestampSeconds)
-    // console.log(timestampMillis.getMonth())
-  }, [])
+  console.log(currWeather.current !== undefined)
+
   return (
     <div className="app">
       <div className="">
@@ -53,9 +38,11 @@ function App() {
         </form>
         <button onClick={(e) => handleClick(e)}>Set</button>
       </div>
-
+      <h1>{currCity.length ? `${currCity[0]} / ${currCity[1]} ` : 'Select'}</h1>
       <div className="weather__wrapper">
-        <WeatherCard weather={currWeather} />
+        <WeatherCard
+          weather={currWeather.current !== undefined ? currWeather : ''}
+        />
       </div>
     </div>
   )

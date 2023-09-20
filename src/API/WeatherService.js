@@ -49,11 +49,15 @@ export const Fetching = async () => {
 
 export const FetchingEightDays = async (city) => {
   //8 days
-  const { lat, lon, country, name } = await getCity(city)
+  try {
+    const { lat, lon, country, name } = await getCity(city)
 
-  const response = await axios.get(
-    `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=2f5fde1104b4b90a76dc69856cbdd7b4&units=metric`
-  )
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=2f5fde1104b4b90a76dc69856cbdd7b4&units=metric`
+    )
 
-  return { ...response.data, country, name }
+    return { ...response.data, country, name }
+  } catch (error) {
+    alert(error)
+  }
 }

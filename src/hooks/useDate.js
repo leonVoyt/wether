@@ -26,13 +26,12 @@ export const useDate = (UNIX_timestamp) => {
     'Dec',
   ]
   let a = new Date(UNIX_timestamp * 1000)
-  let day = a.getDay()
+  let day = days[a.getDay()]
   // let year = a.getFullYear()
-  // let month = months[a.getMonth()]
-  // let date = a.getDate()
+  let month = months[a.getMonth()]
+  let date = a.getDate()
   // let hour = a.getHours()
   // let min = a.getMinutes()
   // let sec = a.getSeconds()
-  let time = days[day]
-  return time
+  return { day, date, month }
 }
