@@ -8,7 +8,7 @@ export const getCity = async (city) => {
     if (response.data[0]) return response.data[0]
     throw console.error('wrong city input!')
   } catch (error) {
-    throw alert('wrong city')
+    throw new Error('wrong city input')
   }
 }
 

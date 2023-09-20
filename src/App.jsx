@@ -10,6 +10,9 @@ function App() {
   const handleClick = (e) => {
     e.preventDefault()
     FetchingEightDays(value).then((data) => {
+      if (!data) {
+        return ''
+      }
       setCurrWeather(data)
       const country = data.country
       const city = data.name
@@ -19,7 +22,6 @@ function App() {
 
     setValue('')
   }
-  console.log(currWeather.current !== undefined)
 
   return (
     <div className="app">
@@ -40,9 +42,7 @@ function App() {
       </div>
       <h1>{currCity.length ? `${currCity[0]} / ${currCity[1]} ` : 'Select'}</h1>
       <div className="weather__wrapper">
-        <WeatherCard
-          weather={currWeather.current !== undefined ? currWeather : ''}
-        />
+        <WeatherCard weather={currWeather} />
       </div>
     </div>
   )
