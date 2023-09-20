@@ -11,11 +11,36 @@ body,
   overflow-y: hidden;
 }
 
-.App {
+.app {
   min-height: 100vh;
   background-image: url(../assets/pexels-pixabay-209831.jpg);
   background-size: cover;
   background-position: 50%;
   /* background-position: cover; */
   background-repeat: no-repeat;
+  padding: 0 5rem;
+  text-align: center;
+}
+.app__input {
+  background-color: #405767;
+  border: 3px solid white;
+  border-radius: 10px;
+  min-width: 200px;
+  min-height: 50px;
+  color: white;
+  outline: none;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.weather__wrapper {
+  height: calc(100vh - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  column-gap: 2rem;
+  row-gap: 2rem;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
