@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+  overflow-y: hidden;
+}
+
+.App {
+  min-height: 100vh;
+  background-image: url(../assets/pexels-pixabay-209831.jpg);
+  background-size: cover;
+  background-position: 50%;
+  /* background-position: cover; */
+  background-repeat: no-repeat;
+}
