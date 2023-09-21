@@ -1,13 +1,22 @@
-import { useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { FetchingEightDays } from './API/WeatherService'
 import './styles/Global.css'
+import CurrWeatherCard from './components/currWeatherCard/CurrWeatherCard'
 import WeatherCard from './components/weatherCard/WeatherCard'
+import Mybutton from './components/UI/button/Mybutton'
+import Myfom from './components/UI/form/Myfom'
+import useResize from './hooks/useResize'
 
 function App() {
-  const [value, setValue] = useState('')
   const [currWeather, setCurrWeather] = useState({})
   const [currCity, setCurrCity] = useState([])
-  const handleClick = (e) => {
+  const [weatherForManyDays, setWeatherForManyDays] = useState([])
+  const [offset, setOffset] = useState(0)
+  const [typeOfDisplay, setTypeOfDisplay] = useState(true)
+  const [countCard, setCountCard] = useState(4)
+  const size = useResize()
+
+  const handleClick = (e, value) => {
     e.preventDefault()
     FetchingEightDays(value).then((data) => {
       if (!data) {
@@ -16,33 +25,67 @@ function App() {
       setCurrWeather(data)
       const country = data.country
       const city = data.name
-
       setCurrCity([country, city])
+      setWeatherForManyDays(data.daily)
     })
-
-    setValue('')
   }
+  useLayoutEffect(() => {
+    if (size > 1310) {
+      setCountCard(4)
+    } else if (size > 1050) {
+      setCountCard(3)
+    } else if (size > 785) {
+      setCountCard(2)
+    } else {
+      setCountCard(1)
+    }
+  }, [size])
 
   return (
     <div className="app">
+      <div className="shadow"></div>
       <div className="app__navigation">
-        <form action="submit" onSubmit={(e) => handleClick(e)}>
-          <label>
-            <input
-              type="text"
-              value={value}
-              placeholder="Select city"
-              onChange={(e) => setValue(e.target.value)}
-              className="app__input"
-              onSubmit={(e) => handleClick(e)}
-            />
-          </label>
-          <button onClick={(e) => handleClick(e)}>Select</button>
-        </form>
+        <Myfom handleClick={handleClick} />
+
+        <div
+          className={`app__toogle ${!typeOfDisplay ? 'eight' : ''}`}
+          onClick={() => setTypeOfDisplay(!typeOfDisplay)}
+        >
+          <div className="app__toogle--type">Current</div>
+          <div className="app__toogle--type">8day`s</div>
+        </div>
+        <div className="app__navigation--current">
+          <h1>{currCity.length ? `${currCity[0]} / ${currCity[1]} ` : ''}</h1>
+        </div>
       </div>
-      <h1>{currCity.length ? `${currCity[0]} / ${currCity[1]} ` : 'Select'}</h1>
       <div className="weather__wrapper">
-        <WeatherCard weather={currWeather} />
+        {typeOfDisplay ? (
+          <CurrWeatherCard weather={currWeather} />
+        ) : weatherForManyDays.length ? (
+          <>
+            <Mybutton
+              offset={offset}
+              setOffset={setOffset}
+              rotate={180}
+              value={-countCard}
+            />
+            {weatherForManyDays.map(
+              (el, index) =>
+                index >= offset &&
+                index < offset + countCard && (
+                  <WeatherCard weather={el} key={index} />
+                )
+            )}
+            <Mybutton
+              offset={offset}
+              setOffset={setOffset}
+              rotate={360}
+              value={countCard}
+            />
+          </>
+        ) : (
+          <CurrWeatherCard weather={currWeather} />
+        )}
       </div>
     </div>
   )

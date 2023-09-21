@@ -30,8 +30,8 @@ export const useDate = (UNIX_timestamp) => {
   // let year = a.getFullYear()
   let month = months[a.getMonth()]
   let date = a.getDate()
-  // let hour = a.getHours()
-  // let min = a.getMinutes()
-  // let sec = a.getSeconds()
-  return { day, date, month }
+  let hour = a.getHours()
+  let min = a.getMinutes()
+  let sec = a.getSeconds()
+  return { day, date, month, hour, min, sec }
 }
