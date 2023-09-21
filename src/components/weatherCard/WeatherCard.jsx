@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './WeatherCard.module.css'
 import { useDate } from '../../hooks/useDate'
-import { WeatherType } from '../WeatherType'
+import { WeatherType } from '../weatherType/WeatherType'
 import { LuWind } from 'react-icons/lu'
 import { MdNightlight } from 'react-icons/md'
 import { TbSunset2 } from 'react-icons/tb'
@@ -9,24 +9,15 @@ import { WiDaySunny } from 'react-icons/wi'
 import { WiHumidity } from 'react-icons/wi'
 import { CiTempHigh } from 'react-icons/ci'
 const weatherCard = React.memo(({ weather }) => {
-  const [dayOfWeek, setDayOfWeek] = useState('')
   const { day, date, month } = useDate(Date.now() / 1000)
-
-  useEffect(() => {
-    console.log(weather)
-    setDayOfWeek(day)
-
-    // setDayOfWeek(timeConverter(Date.now() / 1000))
-  }, [weather])
 
   return weather !== '' && weather.current !== undefined ? (
     <div className={styles.wrapper}>
       <div className={styles.card}>
         <div className={styles.front}>
           <div>
-            {dayOfWeek} / {date}
+            {day} / {date} / {month}
           </div>
-          <div>{month}</div>
           <div className={styles.type}>
             {weather.current.weather[0].description}
           </div>
@@ -37,7 +28,7 @@ const weatherCard = React.memo(({ weather }) => {
             />
           </div>
           <div className={styles.textFlex}>
-            curr <CiTempHigh color="white" /> :{' '}
+            current <CiTempHigh color="white" /> :{' '}
             {Math.round(weather.current.temp)} °C
           </div>
         </div>
@@ -50,7 +41,6 @@ const weatherCard = React.memo(({ weather }) => {
             <p>Max : {Math.round(weather.daily[0].temp.max)} °C</p>
             <p>Min : {Math.round(weather.daily[0].temp.min)} °C</p>
           </div>
-
           <div style={{ display: 'flex', columnGap: 12 }}>
             <p className={styles.textFlex}>
               <TbSunset2 color="white" />

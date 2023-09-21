@@ -12,14 +12,17 @@ body,
 }
 
 .app {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background-image: url(../assets/pexels-pixabay-209831.jpg);
   background-size: cover;
   background-position: 50%;
   /* background-position: cover; */
   background-repeat: no-repeat;
-  padding: 0 5rem;
+  padding: 0.5rem 5rem;
   text-align: center;
+  row-gap: 1rem;
 }
 .app__input {
   background-color: #405767;
@@ -34,7 +37,7 @@ body,
 }
 
 .weather__wrapper {
-  height: calc(100vh - 50px);
+  height: calc(100vh - 122px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,4 +46,30 @@ body,
   row-gap: 2rem;
   justify-content: space-around;
   flex-wrap: wrap;
+  flex-direction: column;
+}
+.app__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.app__navigation form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0.5rem;
+}
+.app__navigation button {
+  background-color: #405767;
+  color: white;
+  min-width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 3px solid white;
+  padding: 0 1rem;
+}
+
+h1 {
+  color: white;
 }

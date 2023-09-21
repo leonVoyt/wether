@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { FetchingEightDays } from './API/WeatherService'
 import './styles/Global.css'
 import WeatherCard from './components/weatherCard/WeatherCard'
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className="app">
-      <div className="">
+      <div className="app__navigation">
         <form action="submit" onSubmit={(e) => handleClick(e)}>
           <label>
             <input
@@ -37,8 +37,8 @@ function App() {
               onSubmit={(e) => handleClick(e)}
             />
           </label>
+          <button onClick={(e) => handleClick(e)}>Select</button>
         </form>
-        <button onClick={(e) => handleClick(e)}>Set</button>
       </div>
       <h1>{currCity.length ? `${currCity[0]} / ${currCity[1]} ` : 'Select'}</h1>
       <div className="weather__wrapper">
