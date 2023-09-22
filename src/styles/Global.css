@@ -15,7 +15,7 @@ body,
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: url(../assets/pexels-pixabay-209831.jpg);
+  background-image: url(../assets/background.jpg);
   background-size: cover;
   background-position: 20%;
   background-repeat: no-repeat;
