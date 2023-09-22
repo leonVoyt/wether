@@ -25,13 +25,12 @@ const Myform = ({ handleClick, handleClickFetchAny }) => {
   }
   const autoComplete = (e, val) => {
     e.preventDefault()
-    const alphabeticValue = val.replace(/[^a-z]/gi, '')
 
-    if (alphabeticValue === '') {
+    if (val === '') {
       setCountries([])
     } else {
       setFetching(true)
-      fetchCities(alphabeticValue).then((data) => {
+      fetchCities(val).then((data) => {
         if (data.length) {
           let res = data.map((el) => {
             let lat = el.latitude
