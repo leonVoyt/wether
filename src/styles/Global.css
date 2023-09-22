@@ -58,7 +58,7 @@ body,
   justify-content: space-around;
   flex-wrap: wrap;
   flex-direction: row;
-  margin-top: 1rem;
+  margin-top: 0;
 }
 .app__navigation {
   display: flex;
@@ -68,10 +68,9 @@ body,
   position: relative;
   row-gap: 1rem;
 }
-/* .app__navigation--current {
-  position: absolute;
-  bottom: -50px;
-} */
+.app__navigation--current {
+  min-height: 37.6px;
+}
 .app__navigation form {
   position: relative;
   display: flex;
@@ -174,6 +173,36 @@ button {
   position: relative;
 }
 
+.app__form--modal {
+  position: absolute;
+  top: 50px;
+  color: rgba(255, 255, 255, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-direction: column;
+  width: 100%;
+  background-color: #405767;
+  border: 3px solid white;
+  border-radius: 10px;
+}
+.modal__item {
+  border: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3;
+  width: 100%;
+}
+.modal__item--button {
+  padding: 5px;
+}
+.modal__item:hover {
+  border: 3px solid white;
+  border-radius: 10px;
+}
+
 @keyframes anim {
   0% {
     transform: rotateY(-60deg);
@@ -190,7 +219,6 @@ button {
     flex-wrap: nowrap;
     flex-direction: column;
     justify-content: center;
-    margin-top: 2rem;
   }
   .app__input {
     width: 100px;

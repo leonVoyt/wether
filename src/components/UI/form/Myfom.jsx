@@ -1,34 +1,50 @@
 import React, { useState } from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
-import { fetchCities } from '../../../API/WeatherService'
+import {
+  FetchingEightDays,
+  fetchCities,
+  getCity,
+} from '../../../API/WeatherService'
 import { useDebouncedCallback } from 'use-debounce'
 
-const Myfom = ({ handleClick }) => {
+const Myform = ({ handleClick, handleClickFetchAny }) => {
   const [value, setValue] = useState('')
   const [countries, setCountries] = useState([])
   const [fetching, setFetching] = useState(false)
 
   const handleSubmit = (e, city) => {
-    setValue('')
-    handleClick(e, city)
+    e.preventDefault()
+    if (countries.length) {
+      setValue('')
+      handleClick(e, city)
+    } else {
+      setCountries([])
+      handleClickFetchAny(value)
+      setValue('')
+    }
   }
   const autoComplete = (e, val) => {
     e.preventDefault()
+    const alphabeticValue = val.replace(/[^a-z]/gi, '')
 
-    if (val === '') {
+    if (alphabeticValue === '') {
       setCountries([])
     } else {
       setFetching(true)
-      fetchCities(val).then((data) => {
-        let res = data.map((el) => {
-          let lat = el.latitude
-          let lon = el.longitude
-          let name = el.name
-          let country = el.country
+      fetchCities(alphabeticValue).then((data) => {
+        if (data.length) {
+          let res = data.map((el) => {
+            let lat = el.latitude
+            let lon = el.longitude
+            let name = el.name
+            let country = el.country
 
-          return { country, lat, lon, name }
-        })
-        setCountries(res)
+            return { country, lat, lon, name }
+          })
+          setCountries(res)
+        } else {
+          setCountries([])
+        }
         setFetching(false)
       })
     }
@@ -39,12 +55,13 @@ const Myfom = ({ handleClick }) => {
       autoComplete(e, val)
     },
     // delay in ms
-    150
+    500
   )
   return (
     <form action="submit" onSubmit={(e) => handleSubmit(e, countries[0])}>
       <label>
         <input
+          data-testid="input-item"
           type="text"
           value={value}
           placeholder="Select city"
@@ -53,51 +70,27 @@ const Myfom = ({ handleClick }) => {
             debounced(e, e.target.value)
           }}
           className="app__input"
-          onSubmit={(e) => handleSubmit(e)}
         />
       </label>
       <button
+        data-testid="search-item"
         className={`app__search`}
-        onClick={(e) => handleSubmit(e, countries[0])}
+        onClick={(e) => {
+          handleSubmit(e, countries[0])
+        }}
       >
         <BiSearchAlt color="white" size={'30px'} />
       </button>
       {value && countries.length ? (
-        <div
-          className=""
-          style={{
-            position: 'absolute',
-            top: 50,
-            color: 'rgba(255,255,255,0.5)',
-            zIndex: 1000,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'end',
-            flexDirection: 'column',
-            width: '100%',
-            backgroundColor: '#405767',
-            border: '3px solid white',
-            borderRadius: '10px',
-          }}
-        >
+        <div className="app__form--modal">
           {fetching
             ? 'loading ...'
             : value !== '' &&
               countries.map((el, index) => (
                 <>
-                  <div
-                    key={index}
-                    className=""
-                    style={{
-                      border: '3px solid transparent',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      margin: 3,
-                    }}
-                  >
+                  <div key={index} className="modal__item">
                     <button
-                      style={{ padding: 3 }}
+                      className="modal__item--button"
                       onClick={(e) => {
                         handleSubmit(e, el)
                       }}
@@ -115,4 +108,4 @@ const Myfom = ({ handleClick }) => {
   )
 }
 
-export default Myfom
+export default Myform

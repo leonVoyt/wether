@@ -18,7 +18,10 @@ const WeatherCard = React.memo(({ weather }) => {
   const { hour: sunsetHour, min: sunsetMin } = useDate(weather.sunset)
 
   return (
-    <div className={styles.card + ' ' + 'animation'}>
+    <div
+      className={styles.card + ' ' + 'animation'}
+      data-testid="card-item-eight"
+    >
       <div className={styles.front}>
         <div className={styles.image}>
           <WeatherType weatherType={weather.weather[0].main} color="white" />

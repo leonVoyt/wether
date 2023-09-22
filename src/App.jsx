@@ -1,27 +1,26 @@
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import {
   FetchingEightDays,
   FetchingEightDaysFromAutoInp,
-  ninja,
-  test,
 } from './API/WeatherService'
 import './styles/Global.css'
 import CurrWeatherCard from './components/currWeatherCard/CurrWeatherCard'
 import WeatherCard from './components/weatherCard/WeatherCard'
 import Mybutton from './components/UI/button/Mybutton'
-import Myfom from './components/UI/form/Myfom'
+import Myform from './components/UI/form/Myfom'
 import useResize from './hooks/useResize'
 
 function App() {
-  const [currWeather, setCurrWeather] = useState({})
+  const [currWeather, setCurrWeather] = useState(null)
   const [currCity, setCurrCity] = useState([])
   const [weatherForManyDays, setWeatherForManyDays] = useState([])
   const [offset, setOffset] = useState(0)
   const [typeOfDisplay, setTypeOfDisplay] = useState(true)
   const [countCard, setCountCard] = useState(4)
   const size = useResize()
+  console.log(process.env)
 
-  const handleClick = (e, el) => {
+  const handleClickFetchEng = (e, el) => {
     e.preventDefault()
     if (!el) {
       return ''
@@ -37,6 +36,23 @@ function App() {
       setWeatherForManyDays(data.daily)
     })
   }
+  const handleClickFetchAny = (value) => {
+    if (!value) {
+      return null
+    }
+    FetchingEightDays(value).then((data) => {
+      if (!data) {
+        return ''
+      }
+      setCurrWeather(data)
+      const country = data.country
+      const city = data.name
+      setCurrCity([country, city])
+      setWeatherForManyDays(data.daily)
+      console.log(data)
+    })
+  }
+
   useLayoutEffect(() => {
     if (size > 1310) {
       setCountCard(4)
@@ -47,18 +63,21 @@ function App() {
     } else {
       setCountCard(1)
     }
-    // ninja().then((data) => console.log(data))
   }, [size])
 
   return (
     <div className="app">
       <div className="shadow"></div>
       <div className="app__navigation">
-        <Myfom handleClick={handleClick} />
+        <Myform
+          handleClick={handleClickFetchEng}
+          handleClickFetchAny={handleClickFetchAny}
+        />
 
         <div
           className={`app__toogle ${!typeOfDisplay ? 'eight' : ''}`}
           onClick={() => setTypeOfDisplay(!typeOfDisplay)}
+          data-testid="button-toogle-type"
         >
           <div className="app__toogle--type">Current</div>
           <div className="app__toogle--type">8day`s</div>
