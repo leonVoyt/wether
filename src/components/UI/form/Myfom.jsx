@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
-import {
-  FetchingEightDays,
-  fetchCities,
-  getCity,
-} from '../../../API/WeatherService'
+import { fetchCities } from '../../../API/WeatherService'
 import { useDebouncedCallback } from 'use-debounce'
 
 const Myform = ({ handleClick, handleClickFetchAny }) => {
@@ -86,18 +82,16 @@ const Myform = ({ handleClick, handleClickFetchAny }) => {
             ? 'loading ...'
             : value !== '' &&
               countries.map((el, index) => (
-                <>
-                  <div key={index} className="modal__item">
-                    <button
-                      className="modal__item--button"
-                      onClick={(e) => {
-                        handleSubmit(e, el)
-                      }}
-                    >
-                      <span>{el.country}</span> / <span>{el.name}</span>
-                    </button>
-                  </div>
-                </>
+                <div key={index} className="modal__item">
+                  <button
+                    className="modal__item--button"
+                    onClick={(e) => {
+                      handleSubmit(e, el)
+                    }}
+                  >
+                    <span>{el.country}</span> / <span>{el.name}</span>
+                  </button>
+                </div>
               ))}
         </div>
       ) : (

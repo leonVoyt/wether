@@ -44,15 +44,11 @@ export const FetchingEightDaysFromAutoInp = async ({
 }
 
 export const fetchCities = async (name) => {
-  try {
-    let response = await axios.get(
-      `https://api.api-ninjas.com/v1/city?name=${name}&limit=5`,
-      {
-        headers: { 'X-Api-Key': process.env.REACT_APP_API_SECRET_KEY_NINJAS },
-      }
-    )
-    return response.data
-  } catch (error) {
-    alert('wrong city input')
-  }
+  let response = await axios.get(
+    `https://api.api-ninjas.com/v1/city?name=${name}&limit=5`,
+    {
+      headers: { 'X-Api-Key': process.env.REACT_APP_API_SECRET_KEY_NINJAS },
+    }
+  )
+  return response.data
 }

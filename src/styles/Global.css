@@ -70,6 +70,9 @@ body,
 }
 .app__navigation--current {
   min-height: 37.6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .app__navigation form {
   position: relative;

@@ -18,7 +18,6 @@ function App() {
   const [typeOfDisplay, setTypeOfDisplay] = useState(true)
   const [countCard, setCountCard] = useState(4)
   const size = useResize()
-  console.log(process.env)
 
   const handleClickFetchEng = (e, el) => {
     e.preventDefault()
@@ -49,7 +48,6 @@ function App() {
       const city = data.name
       setCurrCity([country, city])
       setWeatherForManyDays(data.daily)
-      console.log(data)
     })
   }
 

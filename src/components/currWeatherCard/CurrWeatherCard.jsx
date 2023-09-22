@@ -13,7 +13,6 @@ import MyCard from '../UI/card/MyCard'
 
 const CurrWeatherCard = React.memo(({ weather }) => {
   const { day, date, month } = useDate(Date.now() / 1000)
-  console.log(weather)
 
   return weather ? (
     <div className={styles.wrapper} data-testid="card-item">
