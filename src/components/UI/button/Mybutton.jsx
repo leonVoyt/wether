@@ -2,8 +2,6 @@ import React from 'react'
 import { MdOutlineKeyboardDoubleArrowRight } from 'react-icons/md'
 
 const Mybutton = ({ offset, setOffset, value, rotate }) => {
-  //   console.log(value > 0 ? 4 : 0)
-
   return (
     <button
       className={`button ${

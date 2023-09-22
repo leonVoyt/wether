@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
+import { test } from '../../../API/WeatherService'
 
 const Myfom = ({ handleClick }) => {
   const [value, setValue] = useState('')
@@ -8,7 +9,9 @@ const Myfom = ({ handleClick }) => {
     handleClick(e, value)
     setValue('')
   }
-
+  const s = () => {
+    test(value).then((data) => console.log(data))
+  }
   return (
     <form action="submit" onSubmit={(e) => handleSubmit(e)}>
       <label>

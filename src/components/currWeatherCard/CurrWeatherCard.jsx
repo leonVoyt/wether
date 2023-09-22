@@ -9,6 +9,7 @@ import { WiDaySunny } from 'react-icons/wi'
 import { WiHumidity } from 'react-icons/wi'
 import { CiTempHigh } from 'react-icons/ci'
 import { MdOutlineNightlightRound } from 'react-icons/md'
+import MyCard from '../UI/card/MyCard'
 
 const CurrWeatherCard = React.memo(({ weather }) => {
   const { day, date, month } = useDate(Date.now() / 1000)
@@ -90,14 +91,7 @@ const CurrWeatherCard = React.memo(({ weather }) => {
       </div>
     </div>
   ) : (
-    <div className={styles.card}>
-      <div className={styles.front}>
-        <span>Here will be weather info</span>
-      </div>
-      <div className={styles.back}>
-        <span>Here will be weather info</span>
-      </div>
-    </div>
+    <MyCard>Here will be weather info </MyCard>
   )
 })
 

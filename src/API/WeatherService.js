@@ -25,3 +25,12 @@ export const FetchingEightDays = async (city) => {
     alert(error)
   }
 }
+
+export const test = async (city) => {
+  try {
+    const response = await axios.get(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=10&appid=2f5fde1104b4b90a76dc69856cbdd7b4`
+    )
+    return response.data
+  } catch (error) {}
+}

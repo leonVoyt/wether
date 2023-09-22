@@ -17,8 +17,6 @@ const WeatherCard = React.memo(({ weather }) => {
   const { hour: sunriseHour, min: sunriseMin } = useDate(weather.sunrise)
   const { hour: sunsetHour, min: sunsetMin } = useDate(weather.sunset)
 
-  console.log(weather)
-
   return (
     <div className={styles.card + ' ' + 'animation'}>
       <div className={styles.front}>
@@ -92,16 +90,12 @@ const WeatherCard = React.memo(({ weather }) => {
         </div>
         <div className={styles.textFlex}>
           <LuWind color="white" />
-          {weather.wind_speed} m/s
-          {/* <LuWind color="white" />  */} - {weather.wind_gust} m/s
+          {weather.wind_speed} m/s - {weather.wind_gust} m/s
           <BsArrowDown
             color="white"
             style={{ rotate: `${180 + weather.wind_deg}deg` }}
           />
         </div>
-        {/* <div className={styles.textFlex}></div>
-        weather.wind_deg
-        <div className={styles.textFlex}></div> */}
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react'
-import { FetchingEightDays } from './API/WeatherService'
+import { FetchingEightDays, test } from './API/WeatherService'
 import './styles/Global.css'
 import CurrWeatherCard from './components/currWeatherCard/CurrWeatherCard'
 import WeatherCard from './components/weatherCard/WeatherCard'
@@ -39,6 +39,7 @@ function App() {
     } else {
       setCountCard(1)
     }
+    // test().then((data) => console.log(data))
   }, [size])
 
   return (
@@ -58,6 +59,7 @@ function App() {
           <h1>{currCity.length ? `${currCity[0]} / ${currCity[1]} ` : ''}</h1>
         </div>
       </div>
+
       <div className="weather__wrapper">
         {typeOfDisplay ? (
           <CurrWeatherCard weather={currWeather} />

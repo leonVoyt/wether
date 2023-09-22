@@ -68,10 +68,10 @@ body,
   position: relative;
   row-gap: 1rem;
 }
-.app__navigation--current {
+/* .app__navigation--current {
   position: absolute;
   bottom: -50px;
-}
+} */
 .app__navigation form {
   position: relative;
   display: flex;
@@ -176,7 +176,7 @@ button {
 
 @keyframes anim {
   0% {
-    transform: rotateY(60deg);
+    transform: rotateY(-60deg);
   }
   100% {
     transform: rotateY(0deg);
