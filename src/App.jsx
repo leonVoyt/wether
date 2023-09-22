@@ -1,5 +1,10 @@
 import { useLayoutEffect, useState } from 'react'
-import { FetchingEightDays, test } from './API/WeatherService'
+import {
+  FetchingEightDays,
+  FetchingEightDaysFromAutoInp,
+  ninja,
+  test,
+} from './API/WeatherService'
 import './styles/Global.css'
 import CurrWeatherCard from './components/currWeatherCard/CurrWeatherCard'
 import WeatherCard from './components/weatherCard/WeatherCard'
@@ -16,9 +21,9 @@ function App() {
   const [countCard, setCountCard] = useState(4)
   const size = useResize()
 
-  const handleClick = (e, value) => {
+  const handleClick = (e, el) => {
     e.preventDefault()
-    FetchingEightDays(value).then((data) => {
+    FetchingEightDaysFromAutoInp(el).then((data) => {
       if (!data) {
         return ''
       }
@@ -39,7 +44,7 @@ function App() {
     } else {
       setCountCard(1)
     }
-    // test().then((data) => console.log(data))
+    // ninja().then((data) => console.log(data))
   }, [size])
 
   return (
