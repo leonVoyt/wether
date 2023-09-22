@@ -43,9 +43,9 @@ export const FetchingEightDaysFromAutoInp = async ({
   }
 }
 
-export const ninja = async (name) => {
+export const fetchCities = async (name) => {
   let response = await axios.get(
-    `https://api.api-ninjas.com/v1/city?name=${name}&limit=5&country=UA`,
+    `https://api.api-ninjas.com/v1/city?name=${name}&limit=5`,
     {
       headers: { 'X-Api-Key': 'fzUOFG/JJb/ECLEk2CdHwg==gO24XNS3GhNQB7Nj' },
     }

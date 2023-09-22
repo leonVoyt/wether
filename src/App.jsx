@@ -23,6 +23,9 @@ function App() {
 
   const handleClick = (e, el) => {
     e.preventDefault()
+    if (!el) {
+      return ''
+    }
     FetchingEightDaysFromAutoInp(el).then((data) => {
       if (!data) {
         return ''

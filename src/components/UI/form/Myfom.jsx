@@ -1,28 +1,25 @@
 import React, { useState } from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
-import {
-  FetchingEightDaysFromAutoInp,
-  ninja,
-  test,
-} from '../../../API/WeatherService'
+import { fetchCities } from '../../../API/WeatherService'
+import { useDebouncedCallback } from 'use-debounce'
 
 const Myfom = ({ handleClick }) => {
   const [value, setValue] = useState('')
   const [countries, setCountries] = useState([])
   const [fetching, setFetching] = useState(false)
 
-  // const handleSubmit = (e, value) => {
-  //   handleClick(e, value)
-  // }
-
-  const s = (e, val) => {
+  const handleSubmit = (e, city) => {
+    setValue('')
+    handleClick(e, city)
+  }
+  const autoComplete = (e, val) => {
     e.preventDefault()
 
     if (val === '') {
       setCountries([])
     } else {
       setFetching(true)
-      ninja(val).then((data) => {
+      fetchCities(val).then((data) => {
         let res = data.map((el) => {
           let lat = el.latitude
           let lon = el.longitude
@@ -36,8 +33,16 @@ const Myfom = ({ handleClick }) => {
       })
     }
   }
+  const debounced = useDebouncedCallback(
+    // function
+    (e, val) => {
+      autoComplete(e, val)
+    },
+    // delay in ms
+    150
+  )
   return (
-    <form action="submit" onSubmit={(e) => s(e)}>
+    <form action="submit" onSubmit={(e) => handleSubmit(e, countries[0])}>
       <label>
         <input
           type="text"
@@ -45,13 +50,16 @@ const Myfom = ({ handleClick }) => {
           placeholder="Select city"
           onChange={(e) => {
             setValue(e.target.value)
-            s(e, e.target.value)
+            debounced(e, e.target.value)
           }}
           className="app__input"
-          onSubmit={(e) => s(e)}
+          onSubmit={(e) => handleSubmit(e)}
         />
       </label>
-      <button className={`app__search`} onClick={(e) => s(e)}>
+      <button
+        className={`app__search`}
+        onClick={(e) => handleSubmit(e, countries[0])}
+      >
         <BiSearchAlt color="white" size={'30px'} />
       </button>
       {value && countries.length ? (
@@ -73,11 +81,12 @@ const Myfom = ({ handleClick }) => {
           }}
         >
           {fetching
-            ? 'load'
+            ? 'loading ...'
             : value !== '' &&
-              countries.map((el) => (
+              countries.map((el, index) => (
                 <>
                   <div
+                    key={index}
                     className=""
                     style={{
                       border: '3px solid transparent',
@@ -90,8 +99,7 @@ const Myfom = ({ handleClick }) => {
                     <button
                       style={{ padding: 3 }}
                       onClick={(e) => {
-                        handleClick(e, el)
-                        setValue('')
+                        handleSubmit(e, el)
                       }}
                     >
                       <span>{el.country}</span> / <span>{el.name}</span>
