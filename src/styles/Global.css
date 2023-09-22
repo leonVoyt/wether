@@ -194,6 +194,7 @@ button {
   justify-content: center;
   margin: 3;
   width: 100%;
+  cursor: pointer;
 }
 .modal__item--button {
   padding: 5px;
