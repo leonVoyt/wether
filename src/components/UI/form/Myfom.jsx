@@ -8,16 +8,17 @@ const Myform = ({ handleClick, handleClickFetchAny }) => {
   const [countries, setCountries] = useState([])
   const [fetching, setFetching] = useState(false)
 
-  const handleSubmit = (e, city) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    if (countries.length) {
-      setValue('')
-      handleClick(e, city)
-    } else {
-      setCountries([])
-      handleClickFetchAny(value)
-      setValue('')
-    }
+    setCountries([])
+    handleClickFetchAny(value)
+    setValue('')
+  }
+  const handleSubmitModal = (e) => {
+    e.preventDefault()
+    setCountries([])
+    handleClick(value)
+    setValue('')
   }
   const autoComplete = (e, val) => {
     e.preventDefault()
@@ -86,7 +87,7 @@ const Myform = ({ handleClick, handleClickFetchAny }) => {
                   <button
                     className="modal__item--button"
                     onClick={(e) => {
-                      handleSubmit(e, el)
+                      handleSubmitModal(e, el)
                     }}
                   >
                     <span>{el.country}</span> / <span>{el.name}</span>

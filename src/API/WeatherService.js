@@ -3,7 +3,7 @@ import axios from 'axios'
 export const getCity = async (city) => {
   try {
     const response = await axios.get(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.REACT_APP_API_SECRET_KEY_OPENWEATHER}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.REACT_APP_API_SECRET_KEY_OPENWEATHER}`
     )
     if (response.data[0]) return response.data[0]
     throw console.error('wrong city input!')

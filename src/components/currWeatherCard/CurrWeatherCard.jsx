@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './CurrWeatherCard.module.css'
 import { useDate } from '../../hooks/useDate'
 import { WeatherType } from '../weatherType/WeatherType'
