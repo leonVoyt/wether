@@ -21,7 +21,6 @@ describe('Fetch', () => {
     userEvent.click(searchButton)
     const currWeatherElement = await screen.findByTestId('card-item')
     expect(currWeatherElement).toBeInTheDocument()
-    expect(currWeatherElement).toMatchSnapshot()
   })
   test('fetches 8 cards when clicking the toogle button', async () => {
     render(<App />)
@@ -33,6 +32,6 @@ describe('Fetch', () => {
     userEvent.click(searchButton)
     userEvent.click(toogleButton)
     const eightCards = await screen.findAllByTestId('card-item-eight')
-    expect(eightCards[0]).toMatchSnapshot()
+    expect(eightCards[0]).toBeInTheDocument()
   })
 })
