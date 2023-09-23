@@ -14,10 +14,10 @@ const Myform = ({ handleClick, handleClickFetchAny }) => {
     handleClickFetchAny(value)
     setValue('')
   }
-  const handleSubmitModal = (e) => {
+  const handleSubmitModal = (e, el) => {
     e.preventDefault()
     setCountries([])
-    handleClick(value)
+    handleClick(el)
     setValue('')
   }
   const autoComplete = (e, val) => {

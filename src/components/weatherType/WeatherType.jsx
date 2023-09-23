@@ -13,6 +13,7 @@ export const WeatherType = ({ weatherType, ...props }) => {
     Rain: BsCloudRainHeavy,
     Thunderstorm: MdOutlineThunderstorm,
     Haze: BsFillCloudHaze2Fill,
+    Mist: BsFillCloudHaze2Fill,
   }
   if (type[weatherType]) {
     WeatherIcon = type[weatherType]

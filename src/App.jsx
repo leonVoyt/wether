@@ -19,8 +19,7 @@ function App() {
   const [countCard, setCountCard] = useState(4)
   const size = useResize()
 
-  const handleClickFetchEng = (e, el) => {
-    e.preventDefault()
+  const handleClickFetchEng = (el) => {
     if (!el) {
       return ''
     }
@@ -81,7 +80,15 @@ function App() {
           <div className="app__toogle--type">8day`s</div>
         </div>
         <div className="app__navigation--current">
-          <h1>{currCity.length ? `${currCity[0]} / ${currCity[1]} ` : ''}</h1>
+          <h1 style={{ fontSize: '2rem', color: 'white' }}>
+            {currCity.length ? `${currCity[0]}` : ''}
+          </h1>
+          <h1 style={{ fontSize: '2rem', color: 'white' }}>
+            {currCity.length ? `/` : ''}
+          </h1>
+          <h1 style={{ fontSize: '2rem', color: 'white' }}>
+            {currCity.length ? `${currCity[1]}` : ''}
+          </h1>
         </div>
       </div>
 
