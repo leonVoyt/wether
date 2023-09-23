@@ -5,7 +5,6 @@ import { BsSun } from 'react-icons/bs'
 import { BsFillCloudHaze2Fill } from 'react-icons/bs'
 import { AiOutlineQuestion } from 'react-icons/ai'
 export const WeatherType = ({ weatherType, ...props }) => {
-  //   console.log(props)
   let WeatherIcon = null
   const type = {
     Clear: BsSun,
