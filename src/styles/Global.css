@@ -9,14 +9,14 @@ body,
 #root {
   min-height: 100vh;
   overflow-y: hidden;
+}
+
+.app {
   background-color: #405767;
   background-image: url(../assets/background.jpg);
   background-size: cover;
   background-position: 20%;
   background-repeat: no-repeat;
-}
-
-.app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
