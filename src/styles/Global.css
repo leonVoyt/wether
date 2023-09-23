@@ -9,16 +9,17 @@ body,
 #root {
   min-height: 100vh;
   overflow-y: hidden;
+  background-color: #405767;
+  background-image: url(../assets/background.jpg);
+  background-size: cover;
+  background-position: 20%;
+  background-repeat: no-repeat;
 }
 
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: url(../assets/background.jpg);
-  background-size: cover;
-  background-position: 20%;
-  background-repeat: no-repeat;
   padding: 0.5rem 5rem;
   row-gap: 1rem;
   position: relative;
@@ -209,6 +210,16 @@ button {
   border-radius: 10px;
 }
 
+.loader {
+  animation: rotate 2s linear;
+  animation-iteration-count: infinite;
+  border: 4px dashed #fff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 10rem auto;
+}
+
 @keyframes anim {
   0% {
     transform: rotateY(-60deg);
@@ -228,5 +239,14 @@ button {
   }
   .app__input {
     width: 100px;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

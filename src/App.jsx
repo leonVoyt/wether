@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   FetchingEightDays,
   FetchingEightDaysFromAutoInp,
@@ -9,6 +9,7 @@ import WeatherCard from './components/weatherCard/WeatherCard'
 import Mybutton from './components/UI/button/Mybutton'
 import Myform from './components/UI/form/Myfom'
 import useResize from './hooks/useResize'
+import bg from './assets/background.jpg'
 
 function App() {
   const [currWeather, setCurrWeather] = useState(null)
@@ -18,7 +19,7 @@ function App() {
   const [typeOfDisplay, setTypeOfDisplay] = useState(true)
   const [countCard, setCountCard] = useState(4)
   const size = useResize()
-
+  const [backgroundLoaded, setBackgroundLoaded] = useState(false)
   const handleClickFetchEng = (el) => {
     if (!el) {
       return ''
@@ -50,7 +51,7 @@ function App() {
     })
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (size > 1310) {
       setCountCard(4)
     } else if (size > 1050) {
@@ -61,6 +62,18 @@ function App() {
       setCountCard(1)
     }
   }, [size])
+
+  useEffect(() => {
+    const backgroundImage = new Image()
+    backgroundImage.src = bg
+    backgroundImage.onload = () => {
+      setBackgroundLoaded(true)
+    }
+  }, [])
+
+  if (!backgroundLoaded) {
+    return <div className="loader"></div>
+  }
 
   return (
     <div className="app">
